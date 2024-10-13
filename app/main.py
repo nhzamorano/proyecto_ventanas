@@ -5,6 +5,7 @@ modelos_ventana = ["O","XO","OXO","OXXO"]
 aluminio = ["Pulido","Lacado Brillante","Lacado Mate","Anodizado"]
 vidrio_list = ["Transparente","Bronce", "Azul"]
 esmerilado_lst = ["Si","No"]
+
 controlador = ControladorCotizacion()
 
 def mostrar_menu():
@@ -47,7 +48,7 @@ def pedir_numeros(opcion):
             print("")
     return opc  
 
-def pedir_datos():
+def pedir_datos():    
     nombre_cliente = input("Ingrese el nombre del cliente: ")
     empresa_cliente = input("Ingrese el nombre de la empresa: ")
     cantidad_ventanas = 0
@@ -73,7 +74,7 @@ def pedir_datos():
         cantidad = pedir_numeros("la cantidad de ventanas")
         cantidad_ventanas += cantidad
         print()
-        ventana = controlador.agregar_ventanas(estilo, ancho, alto, acabado, tipo_vidrio, esmerilado)
+        ventana = controlador.agregar_ventanas(estilo, ancho, alto, acabado, tipo_vidrio, cantidad, esmerilado)
         ventanas.append(ventana)
         #print(estilo,acabado,tipo_vidrio)
         resp = input("Desea cotizar otro modelo de ventana para este cliente? <S/N>: ")
@@ -85,6 +86,19 @@ def pedir_datos():
     cliente = controlador.agregar_cliente(nombre_cliente,empresa_cliente,cantidad_ventanas)
     controlador.crear_cotizacion(cliente,ventanas)
     total = controlador.total
+    ancho_col = 72
+    print('='*ancho_col)
+    formato_cols = '{0:<4} {1:<20} {2:<20} {3:<4} {4:<4} {5:<4}'
+    print(formato_cols.format('Modelo', 'Aluminio', 'Vidrio', 'Ancho', 'Alto', 'Cantidad'))
+    print('='*ancho_col)
+
+    vntnas = controlador.obtener_ventanas()
+    print(vntnas)
+    for ven in vntnas:
+        print(ven[3])
+    
+    
+
     print(f"Nombre: {nombre_cliente}")
     print(f"Empresa: {empresa_cliente}")
     print(f"Cantidad de ventanas cotizadas: {cantidad_ventanas}")
@@ -92,6 +106,7 @@ def pedir_datos():
 
 def principal():
     while True:
+        controlador.clear_lists()
         mostrar_menu()
         opc = input("Seleccione una opcion: ")
         if opc == '1':

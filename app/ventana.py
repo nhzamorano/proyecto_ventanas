@@ -1,18 +1,38 @@
 from controlador_cotizacion import ControladorCotizacion
 
 class Ventana:
-    def __init__(self, estilo, ancho, alto, acabado, tipo_vidrio, esmerilado=False):
+    def __init__(self, estilo, ancho, alto, acabado, tipo_vidrio, cantidad, esmerilado=False):
         self.estilo = estilo
         self.ancho = ancho
         self.alto = alto
         self.acabado = acabado
         self.tipo_vidrio = tipo_vidrio
+        self.cantidad = cantidad
         self.esmerilado = esmerilado
         self.costo_esquinas = 4310
         self.costo_chapa = 16200
         self.costo_esmerilado = 5.20
         self.controlador = ControladorCotizacion()
     
+    def __format__(self, format_spec=''):
+        return f"{self.estilo} {self.acabado} {self.tipo_vidrio} {self.ancho} {self.alto} {self.cantidad}"
+    
+    def to_list(self):
+        """Devuelve una lista con los atributos de la ventana."""
+        return [
+            self.estilo,
+            self.ancho,
+            self.alto,
+            self.acabado,
+            self.tipo_vidrio,
+            self.cantidad,
+            self.esmerilado
+        ]
+
+
+    def mostrarDatos(self):
+        print(self.estilo)
+
     def calcular_ancho_naves(self):
         naves = self.controlador.data["estilo_naves"][self.estilo]
         return self.ancho / naves, naves

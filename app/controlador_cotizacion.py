@@ -15,6 +15,12 @@ class ControladorCotizacion:
             cls.__instance.data = cls.__instance.cargar_datos()
         return cls.__instance
     
+    def clear_lists(self):
+        """Método para vaciar los arreglos para una nueva cotización."""
+        self.clientes.clear()
+        self.cotizaciones.clear()
+        self.ventanas.clear()
+
     @classmethod
     def cargar_datos(cls):
         archivo_json = 'data.json'
@@ -28,16 +34,15 @@ class ControladorCotizacion:
         except json.JSONDecodeError:
             print(f"Error al decodificar el archivo JSON.")
             return {}
-
-
+    
     def agregar_cliente(self,nombre, empresa, cantidad_ventanas):
         self.cliente = Cliente(nombre,empresa,cantidad_ventanas)
         self.clientes.append(self.cliente)
         return self.cliente
     
-    def agregar_ventanas(self,estilo, ancho, alto, acabado, tipo_vidrio, esmerilado):
+    def agregar_ventanas(self,estilo, ancho, alto, acabado, tipo_vidrio, cantidad, esmerilado):
         from ventana import Ventana
-        self.ventana = Ventana(estilo, ancho, alto, acabado, tipo_vidrio, esmerilado)
+        self.ventana = Ventana(estilo, ancho, alto, acabado, tipo_vidrio, cantidad, esmerilado)
         self.ventanas.append(self.ventana)
         return self.ventana
 
@@ -52,5 +57,9 @@ class ControladorCotizacion:
     
     def obtener_clientes(self):
         return self.clientes 
+    
+    def obtener_ventanas(self):
+        """Método para retornar la lista de ventanas."""
+        return [ventana.to_list() for ventana in self.ventanas]
     
 

@@ -6,4 +6,5 @@ __pycache__/
 /env
 
 #Igoner DB
-
+citas_medicas.sqlite3
+citas_medicas.sqlite3-journal

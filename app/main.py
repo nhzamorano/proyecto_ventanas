@@ -86,23 +86,31 @@ def pedir_datos():
     cliente = controlador.agregar_cliente(nombre_cliente,empresa_cliente,cantidad_ventanas)
     controlador.crear_cotizacion(cliente,ventanas)
     total = controlador.total
-    ancho_col = 72
-    print('='*ancho_col)
-    formato_cols = '{0:<4} {1:<20} {2:<20} {3:<4} {4:<4} {5:<4}'
-    print(formato_cols.format('Modelo', 'Aluminio', 'Vidrio', 'Ancho', 'Alto', 'Cantidad'))
-    print('='*ancho_col)
-
     vntnas = controlador.obtener_ventanas()
-    print(vntnas)
-    for ven in vntnas:
-        print(ven[3])
-    
-    
+    return (vntnas,nombre_cliente,empresa_cliente,cantidad_ventanas,total)
 
+def mostrar_cotizacion(datos):
+    vntnas,nombre_cliente,empresa_cliente,cantidad_ventanas,total = datos
+    print()
     print(f"Nombre: {nombre_cliente}")
     print(f"Empresa: {empresa_cliente}")
+    print("DETALLE DE LA COTIZACION")
+    ancho_col = 68
+    print('='*ancho_col)
+    formato_cols = '{0:<7} {1:<20} {2:<15} {3:<6} {4:<6} {5:<6}'
+    print(formato_cols.format('Modelo', 'Aluminio', 'Vidrio', 'Ancho', 'Alto', 'Cantidad'))
+    print('='*ancho_col)
+    #print(vntnas)
+    for ven in vntnas:
+        #print(ven[3])
+        print(formato_cols.format(ven[0],ven[3],ven[4],ven[1],ven[2],ven[5]))
+    
+    print()
     print(f"Cantidad de ventanas cotizadas: {cantidad_ventanas}")
     print(f"El costo total de la cotización es: ${total:.0f}")
+    print()
+    x=input("Presione <enter> para contunuar ")
+    print()
 
 def principal():
     while True:
@@ -110,7 +118,8 @@ def principal():
         mostrar_menu()
         opc = input("Seleccione una opcion: ")
         if opc == '1':
-            pedir_datos()
+            datos=pedir_datos()
+            mostrar_cotizacion(datos)
         elif opc == '2':
             print("Saliendo del sistema...")
             break
@@ -118,7 +127,4 @@ def principal():
             print("Opcion invalida, Ingtente de nuevo")
 
 if __name__ == "__main__":
-    #Wimport pytest
-    #pytest.main()
-
     principal()

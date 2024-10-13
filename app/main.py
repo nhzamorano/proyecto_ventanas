@@ -2,10 +2,14 @@ from controlador_cotizacion import ControladorCotizacion
 
 #Listas para generear los menus de seleccion
 modelos_ventana = ["O","XO","OXO","OXXO"]
-aluminio = ["pulido","Lacado Brillante","Lacado Mate","Anodizado"]
+aluminio = ["Pulido","Lacado Brillante","Lacado Mate","Anodizado"]
 vidrio_list = ["Transparente","Bronce", "Azul"]
 esmerilado_lst = ["Si","No"]
 controlador = ControladorCotizacion()
+
+def mostrar_menu():
+    print("1. Crear cotización")
+    print("2. Salir")
 
 def pedir_opciones(opciones,inf):
     while True:
@@ -72,7 +76,7 @@ def pedir_datos():
         ventana = controlador.agregar_ventanas(estilo, ancho, alto, acabado, tipo_vidrio, esmerilado)
         ventanas.append(ventana)
         #print(estilo,acabado,tipo_vidrio)
-        resp = input("Desea cotizar otro modelo de ventana? <S/N>: ")
+        resp = input("Desea cotizar otro modelo de ventana para este cliente? <S/N>: ")
         resp = resp.upper()
         if resp.upper() == 'N':
             resp = 'N'
@@ -83,13 +87,20 @@ def pedir_datos():
     total = controlador.total
     print(f"Nombre: {nombre_cliente}")
     print(f"Empresa: {empresa_cliente}")
+    print(f"Cantidad de ventanas cotizadas: {cantidad_ventanas}")
     print(f"El costo total de la cotización es: ${total:.0f}")
 
 def principal():
-    pedir_datos()
-    #print(datos)
-    #cotizacion = calcular(datos)
-    #mostrar_datos(datos, cotizacion)
+    while True:
+        mostrar_menu()
+        opc = input("Seleccione una opcion: ")
+        if opc == '1':
+            pedir_datos()
+        elif opc == '2':
+            print("Saliendo del sistema...")
+            break
+        else:
+            print("Opcion invalida, Ingtente de nuevo")
 
 if __name__ == "__main__":
     #Wimport pytest

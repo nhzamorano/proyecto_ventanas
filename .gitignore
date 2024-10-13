@@ -8,3 +8,5 @@ __pycache__/
 #Igoner DB
 citas_medicas.sqlite3
 citas_medicas.sqlite3-journal
+
+.pytest_cache

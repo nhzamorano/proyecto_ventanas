@@ -10,7 +10,7 @@ class Cotizacion:
         descuento = 0
         costo_bruto = total
         #iva = costo_bruto*self.porcengtaje_iva
-        if self.cliente.cantidad_ventanas > 100:
+        if int(self.cliente.cantidad_ventanas) > 100:
             total *= self.porcentaje  # Apply 10% discount
             descuento = costo_bruto - total
         return total,descuento,costo_bruto

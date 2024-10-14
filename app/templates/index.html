@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<form action="/procesar_cotizacion" method="POST">
+<label for="nombre">Nombre del cliente:</label>
+<input type="text" id="nombre" name="nombre" required><br>
+<label for="empresa">Empresa:</label>
+<input type="text" id="empresa" name="empresa" required><br><br>
+
+Escoja el modelo de la ventana: 
+<select name="modelo">
+    {% for modelo,nave in modelos.items() %}
+        <option value="{{modelo}}">{{modelo}}</option>
+    {% endfor %}
+</select><br>
+Escoja el tipo acabado aluminio: 
+<select name="acabado">
+    {% for acabado, valor in acabados.items() %}
+        <option value="{{acabado}}">{{acabado}}</option>
+    {% endfor %}
+</select><br>
+Escoja el tipo de vidio: 
+<select name="vidrio">
+    {% for tipo, valor in vidrio.items() %}
+        <option value="{{tipo}}">{{tipo}}</option>
+    {% endfor %}
+</select><br>
+<label>¿Dese el vidrio esmerilado?</label><br>
+Si: <input type="radio" name="esmerilado" value="Si" checked>
+No: <input type="radio" name="esmerilado" value="No"><br>
+Ancho de la ventana: <input type="number" min="1" max="1000" value="12" name="ancho"><br>
+Alto de la ventana: <input type="number" min="1" max="1000" value="90" name="alto"><br>
+Cantidad de ventanas: <input type="number" min="1" max="1000" value="1" name="cantidad"><br>
+
+<!-- Pregunta para cotizar otro modelo -->
+<label>¿Desea cotizar otro modelo para el mismo cliente?</label><br>
+Si: <input type="radio" name="otro_modelo" value="Si">
+No: <input type="radio" name="otro_modelo" value="No" checked><br>
+
+<button>Cotizar</button>
+</form>
+{% endblock %}
+

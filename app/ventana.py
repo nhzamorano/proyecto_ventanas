@@ -35,15 +35,15 @@ class Ventana:
 
     def calcular_ancho_naves(self):
         naves = self.controlador.data["estilo_naves"][self.estilo]
-        return self.ancho / naves, naves
+        return int(self.ancho) / int(naves), naves
 
     def calcular_area_nave(self):
         ancho_nave, _ = self.calcular_ancho_naves()
-        return (ancho_nave - 1.5) * (self.alto - 1.5)  
+        return (int(ancho_nave) - 1.5) * (int(self.alto) - 1.5)  
 
     def calcular_perimetro_nave(self):
         ancho_nave, _ = self.calcular_ancho_naves()
-        return 2 * (ancho_nave + self.alto) - 4 * 4  
+        return 2 * (int(ancho_nave) + int(self.alto)) - 4 * 4  
 
     def calcular_costo_aluminio(self):
         perimetro_total = self.calcular_perimetro_nave() * self.calcular_ancho_naves()[1]      

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<h2>Cotizacion</h2>
+<p>Contacto: {{nombre}}</p>
+<p>Empresa: {{empresa}}</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Modelo</th>
+            <th>Aluminio</th>
+            <th>Vidrio</th>
+            <th>Ancho</th>
+            <th>Alto</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ventana in ventanas %}
+            <tr>
+                <td>{{ventana.0}}</td>
+                <td>{{ventana.3}}</td>
+                <td>{{ventana.4}}</td>
+                <td>{{ventana.1}}</td>
+                <td>{{ventana.2}}</td>
+                <td>{{ventana.5}}</td>
+            </tr>
+        {% endfor%}
+    </tbody>
+</table>
+
+
+
+
+<p>{{total}}</p>
+<a href="/">Regresar</a>
+{% endblock %}

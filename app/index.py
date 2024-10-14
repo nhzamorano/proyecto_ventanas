@@ -32,18 +32,25 @@ def procesar_cotizacion():
         cantidad = request.form["cantidad"]
         ventana = controlador.agregar_ventanas(modelo, ancho, alto, acabado, tipo_vidrio, cantidad, esmerilado)
         ventanas.append(ventana)
-        cliente = controlador.agregar_cliente(nombre_cliente, empresa_cliente, cantidad)
-        controlador.crear_cotizacion(cliente, ventanas)
-        total = controlador.total
-        vntnas = controlador.obtener_ventanas()
+        
         continuar = request.form["otro_modelo"]
         continuar = continuar.upper()
         cantidad_ventanas += int(cantidad)
-
+        
         if continuar == "NO":
-            #print(f"CONTINUAR: {continuar}, cantidad ventanas {cantidad_ventanas}")
+            cliente = controlador.agregar_cliente(nombre_cliente, empresa_cliente, cantidad_ventanas)
+            controlador.crear_cotizacion(cliente, ventanas)
+            total = controlador.total
+            vntnas = controlador.obtener_ventanas()
+            print(f"Totales: {total}, cantidad ventanas {cantidad_ventanas}")
+            print(f"Subtotal: {total[0]}")
+            sub_total = total[0]
+            descuento = total[1]
+            iva = sub_total*19/100
+            total_general = sub_total-descuento+iva
+            totales =[sub_total,descuento,iva,total_general]
             controlador.clear_lists()
-            return render_template("mostrar_cotizacion.html",nombre=nombre_cliente,empresa=empresa_cliente,total=total,ventanas=vntnas,cantidad=cantidad_ventanas)
+            return render_template("mostrar_cotizacion.html",nombre=nombre_cliente,empresa=empresa_cliente,total=totales,ventanas=vntnas,cantidad=cantidad_ventanas)
         else:
             modelos = controlador.data["estilo_naves"]
             acabados = controlador.data["costo_por_cm_lineal"]

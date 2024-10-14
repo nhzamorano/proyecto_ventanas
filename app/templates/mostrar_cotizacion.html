@@ -32,7 +32,11 @@
 
 
 
-<p>{{cantidad}}</p>
-<p>{{total}}</p>
+<p>Cantidad de ventanas cotizadas: {{cantidad}}</p>
+<p>Costo bruto: {{ "{:.0f}".format(total.0) }}</p>
+
+<p>Descuento: {{"{:.0f}".format(total.1)}}</p>
+<p>Impuesto a las ventas IVA: {{ "{:.0f}".format(total.2) }}</p>
+<p>Total factura: {{ "{:.0f}".format(total.3)}}</p>
 <a href="/">Regresar</a>
 {% endblock %}

@@ -4,17 +4,21 @@ from controlador_cotizacion import ControladorCotizacion
 controlador = ControladorCotizacion()
 app = Flask(__name__)
 
-
+cantidad_ventanas = 0
 
 @app.route("/")
 def index():
+    
+    global cantidad_ventanas
     modelos = controlador.data["estilo_naves"]
     acabados = controlador.data["costo_por_cm_lineal"]
     vidrio = controlador.data["costo_por_cm2"]
+    cantidad_ventanas = 0
     return render_template('index.html',modelos=modelos,acabados=acabados,vidrio=vidrio)
 
 @app.route("/procesar_cotizacion", methods=["POST"])
 def procesar_cotizacion():
+    global cantidad_ventanas
     if request.method == "POST":
         ventanas = []
         nombre_cliente = request.form["nombre"]
@@ -32,8 +36,20 @@ def procesar_cotizacion():
         controlador.crear_cotizacion(cliente, ventanas)
         total = controlador.total
         vntnas = controlador.obtener_ventanas()
-        controlador.clear_lists()
-    return render_template("mostrar_cotizacion.html",nombre=nombre_cliente,empresa=empresa_cliente,total=total,ventanas=vntnas)
+        continuar = request.form["otro_modelo"]
+        continuar = continuar.upper()
+        cantidad_ventanas += int(cantidad)
+
+        if continuar == "NO":
+            #print(f"CONTINUAR: {continuar}, cantidad ventanas {cantidad_ventanas}")
+            controlador.clear_lists()
+            return render_template("mostrar_cotizacion.html",nombre=nombre_cliente,empresa=empresa_cliente,total=total,ventanas=vntnas,cantidad=cantidad_ventanas)
+        else:
+            modelos = controlador.data["estilo_naves"]
+            acabados = controlador.data["costo_por_cm_lineal"]
+            vidrio = controlador.data["costo_por_cm2"] 
+            return render_template('index.html',modelos=modelos,acabados=acabados,vidrio=vidrio,nombre=nombre_cliente,empresa=empresa_cliente)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8000, debug=True)

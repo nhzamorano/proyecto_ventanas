@@ -3,6 +3,7 @@ from cotizacion import Cotizacion
 from cliente import Cliente
 
 from database import DB
+
 class ControladorCotizacion:
     __instance = None
 
@@ -59,7 +60,7 @@ class ControladorCotizacion:
         return self.clientes 
     
     def obtener_ventanas(self):
-        """Método para retornar la lista de ventanas."""
+        """Método que retorna la lista de ventanas."""
         return [ventana.to_list() for ventana in self.ventanas]
     
 

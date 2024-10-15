@@ -1,0 +1,19 @@
+{
+    "costo_por_cm_lineal": {
+        "Pulido": 507.0,
+        "Lacado Brillante": 542.0,
+        "Lacado Mate": 536.0,
+        "Anodizado": 573.0
+    },
+    "estilo_naves": {
+        "O": 1,
+        "XO": 2,
+        "OXO": 3,
+        "OXXO": 4
+    },
+    "costo_por_cm2": {
+        "Transparente": 8.25,
+        "Bronce": 9.15,
+        "Azul": 12.75
+    }
+}

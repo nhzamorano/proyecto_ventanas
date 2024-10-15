@@ -2,10 +2,9 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from app.ventana import Ventana
+from ..app.ventana import Ventana
 
 def test_create_ventana():
-    #estilo, ancho, alto, acabado, tipo_vidrio, esmerilado=False
     ventana = Ventana('XO',15,20,'Pulido','Azul',True)
     assert ventana.estilo == 'XO'
     assert ventana.ancho == 15

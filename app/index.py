@@ -5,6 +5,7 @@ controlador = ControladorCotizacion()
 app = Flask(__name__)
 
 cantidad_ventanas = 0
+totales = []
 
 @app.route("/")
 def index():
@@ -19,6 +20,7 @@ def index():
 @app.route("/procesar_cotizacion", methods=["POST"])
 def procesar_cotizacion():
     global cantidad_ventanas
+    global totales 
     if request.method == "POST":
         ventanas = []
         nombre_cliente = request.form["nombre"]
@@ -42,13 +44,14 @@ def procesar_cotizacion():
             controlador.crear_cotizacion(cliente, ventanas)
             total = controlador.total
             vntnas = controlador.obtener_ventanas()
-            print(f"Totales: {total}, cantidad ventanas {cantidad_ventanas}")
+            print(f"Total: {total}")
+
             print(f"Subtotal: {total[0]}")
             sub_total = total[0]
             descuento = total[1]
             iva = sub_total*19/100
             total_general = sub_total-descuento+iva
-            totales =[sub_total,descuento,iva,total_general]
+            totales = [sub_total,descuento,iva,total_general]
             controlador.clear_lists()
             return render_template("mostrar_cotizacion.html",nombre=nombre_cliente,empresa=empresa_cliente,total=totales,ventanas=vntnas,cantidad=cantidad_ventanas)
         else:

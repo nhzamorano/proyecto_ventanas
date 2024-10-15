@@ -1,42 +1,47 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-<h2>Cotizacion</h2>
-<p>Contacto: {{nombre}}</p>
-<p>Empresa: {{empresa}}</p>
+<div class="container">
+    <h1 class="text-center my-4">Compañía PQR</h1>
+    <h3 class="text-center mb-4">Sistema para Cotizar Ventanas</h3>
 
-<table>
-    <thead>
-        <tr>
-            <th>Modelo</th>
-            <th>Aluminio</th>
-            <th>Vidrio</th>
-            <th>Ancho</th>
-            <th>Alto</th>
-            <th>Cantidad</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for ventana in ventanas %}
+    <h2 class="mb-4">Cotización</h2>
+    <p><strong>Contacto:</strong> {{nombre}}</p>
+    <p><strong>Empresa:</strong> {{empresa}}</p>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
             <tr>
-                <td>{{ventana.0}}</td>
-                <td>{{ventana.3}}</td>
-                <td>{{ventana.4}}</td>
-                <td>{{ventana.1}}</td>
-                <td>{{ventana.2}}</td>
-                <td>{{ventana.5}}</td>
+                <th>Modelo</th>
+                <th>Aluminio</th>
+                <th>Vidrio</th>
+                <th>Ancho (cm)</th>
+                <th>Alto (cm)</th>
+                <th>Cantidad</th>
             </tr>
-        {% endfor%}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for ventana in ventanas %}
+                <tr>
+                    <td>{{ventana.0}}</td>
+                    <td>{{ventana.3}}</td>
+                    <td>{{ventana.4}}</td>
+                    <td>{{ventana.1}}</td>
+                    <td>{{ventana.2}}</td>
+                    <td>{{ventana.5}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
+    <p><strong>Cantidad de ventanas cotizadas:</strong> {{cantidad}}</p>
+    <p><strong>Costo bruto:</strong> {{ "{:.0f}".format(total.0) }}</p>
+    <p><strong>Descuento:</strong> {{ "{:.0f}".format(total.1) }}</p>
+    <p><strong>IVA:</strong> {{ "{:.0f}".format(total.2) }}</p>
+    <p><strong>Total factura:</strong> {{ "{:.0f}".format(total.3) }}</p>
 
-
-<p>Cantidad de ventanas cotizadas: {{cantidad}}</p>
-<p>Costo bruto: {{ "{:.0f}".format(total.0) }}</p>
-
-<p>Descuento: {{"{:.0f}".format(total.1)}}</p>
-<p>Impuesto a las ventas IVA: {{ "{:.0f}".format(total.2) }}</p>
-<p>Total factura: {{ "{:.0f}".format(total.3)}}</p>
-<a href="/">Regresar</a>
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-secondary">Regresar</a>
+    </div>
+</div>
 {% endblock %}

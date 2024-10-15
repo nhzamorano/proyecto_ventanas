@@ -2,9 +2,9 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from app.ventana import Ventana
-from app.cliente import Cliente
-from app.cotizacion import Cotizacion
+from ..app.ventana import Ventana
+from ..app.cliente import Cliente
+from ..app.cotizacion import Cotizacion
 
 def test_create_cotizacion():
     cliente = Cliente("Juan Perez","Aceros ZZ",10)

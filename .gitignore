@@ -1,9 +1,18 @@
 # Python-specific ignore patterns
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite
 
-#Ignore virtual environment
+# Archivos de configuración del entorno virtual
 /env
+.env
+.env/
+
+# Archivos de configuración de IDEs
+.vscode/
 
 #Igoner DB
 citas_medicas.sqlite3

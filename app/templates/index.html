@@ -1,43 +1,89 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-<form action="/procesar_cotizacion" method="POST">
-<label for="nombre">Nombre del cliente:</label>
-<input type="text" id="nombre" name="nombre" value="{{nombre}}" required><br>
-<label for="empresa">Empresa:</label>
-<input type="text" id="empresa" name="empresa" value="{{empresa}}" required><br><br>
+<div class="container">
+    <h1 class="text-center my-4">Compañía PQR</h1>
+    <h3 class="text-center mb-5">Sistema para Cotizar Ventanas</h3>
 
-Escoja el modelo de la ventana: 
-<select name="modelo">
-    {% for modelo,nave in modelos.items() %}
-        <option value="{{modelo}}">{{modelo}}</option>
-    {% endfor %}
-</select><br>
-Escoja el tipo acabado aluminio: 
-<select name="acabado">
-    {% for acabado, valor in acabados.items() %}
-        <option value="{{acabado}}">{{acabado}}</option>
-    {% endfor %}
-</select><br>
-Escoja el tipo de vidio: 
-<select name="vidrio">
-    {% for tipo, valor in vidrio.items() %}
-        <option value="{{tipo}}">{{tipo}}</option>
-    {% endfor %}
-</select><br>
-<label>¿Dese el vidrio esmerilado?</label><br>
-Si: <input type="radio" name="esmerilado" value="Si" checked>
-No: <input type="radio" name="esmerilado" value="No"><br>
-Ancho de la ventana: <input type="number" min="1" max="1000" value="12" name="ancho"><br>
-Alto de la ventana: <input type="number" min="1" max="1000" value="90" name="alto"><br>
-Cantidad de ventanas: <input type="number" min="1" max="1000" value="1" name="cantidad"><br>
-<br>
-<!-- Pregunta para cotizar otro modelo -->
-<label>¿Desea cotizar otro modelo para el mismo cliente?</label><br>
-Si: <input type="radio" name="otro_modelo" value="Si">
-No: <input type="radio" name="otro_modelo" value="No" checked><br>
-<br>
-<button>Cotizar</button>
-</form>
+    <form action="/procesar_cotizacion" method="POST" class="row g-3">
+        <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre del cliente:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{nombre}}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="empresa" class="form-label">Empresa:</label>
+            <input type="text" class="form-control" id="empresa" name="empresa" value="{{empresa}}" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="modelo" class="form-label">Escoja el modelo de la ventana:</label>
+            <select class="form-select" name="modelo">
+                {% for modelo, nave in modelos.items() %}
+                    <option value="{{modelo}}">{{modelo}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="acabado" class="form-label">Escoja el tipo acabado aluminio:</label>
+            <select class="form-select" name="acabado">
+                {% for acabado, valor in acabados.items() %}
+                    <option value="{{acabado}}">{{acabado}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="vidrio" class="form-label">Escoja el tipo de vidrio:</label>
+            <select class="form-select" name="vidrio">
+                {% for tipo, valor in vidrio.items() %}
+                    <option value="{{tipo}}">{{tipo}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">¿El vidrio es esmerilado?</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="esmerilado" value="Si" checked>
+                <label class="form-check-label">Sí</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="esmerilado" value="No">
+                <label class="form-check-label">No</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="ancho" class="form-label">Ancho de la ventana (cm):</label>
+            <input type="number" class="form-control" min="1" max="1000" value="12" name="ancho">
+        </div>
+
+        <div class="col-md-6">
+            <label for="alto" class="form-label">Alto de la ventana (cm):</label>
+            <input type="number" class="form-control" min="1" max="1000" value="90" name="alto">
+        </div>
+
+        <div class="col-md-6">
+            <label for="cantidad" class="form-label">Cantidad de ventanas:</label>
+            <input type="number" class="form-control" min="1" max="1000" value="1" name="cantidad">
+        </div>
+
+        <div class="col-md-12">
+            <label class="form-label">¿Desea cotizar otro modelo para el mismo cliente?</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="otro_modelo" value="Si">
+                <label class="form-check-label">Sí</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="otro_modelo" value="No" checked>
+                <label class="form-check-label">No</label>
+            </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Cotizar</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
-

@@ -3,29 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/ccs/bootstrap/css/bootstrap.min.css">
+    
     <title>Sistema Cotizacion Ventanas</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    {% block customCSS %}
+    {% endblock %}
 </head>
 <body>
-    <h1>Compañia PQR</h1>
-    <h3>Sistema para Cotizar Ventanas</h3>
+    
     {% block contenido %}
 
     {% endblock %}
+    <script src="../static/ccs/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

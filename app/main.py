@@ -110,12 +110,14 @@ def mostrar_cotizacion(datos):
 
     console.print(table)
 
-    iva = total[2] * 0.19
-    total_general = total[0] + iva
+    sub_total = total[0]
+    descuento = total[1]
+    iva = sub_total*19/100
+    total_general = sub_total-descuento+iva
 
     console.print(f"[bold]Cantidad de ventanas cotizadas:[/bold] {cantidad_ventanas}")
-    console.print(f"[bold]Costo bruto:[/bold] ${total[2]:.0f}")
-    console.print(f"[bold]Descuento:[/bold] ${total[1]:.0f}")
+    console.print(f"[bold]Costo bruto:[/bold] ${sub_total:.0f}")
+    console.print(f"[bold]Descuento:[/bold] ${descuento:.0f}")
     console.print(f"[bold]IVA (19%):[/bold] ${iva:.0f}")
     console.print(f"[bold]Costo total:[/bold] ${total_general:.0f}")
 

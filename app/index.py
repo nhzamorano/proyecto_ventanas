@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect
+from flask import Flask,render_template,request
 from controlador_cotizacion import ControladorCotizacion
 
 controlador = ControladorCotizacion()
@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 cantidad_ventanas = 0
 totales = []
+ventanas = []
 
 @app.route("/")
 def index():
@@ -21,8 +22,8 @@ def index():
 def procesar_cotizacion():
     global cantidad_ventanas
     global totales 
+    global ventanas 
     if request.method == "POST":
-        ventanas = []
         nombre_cliente = request.form["nombre"]
         empresa_cliente = request.form["empresa"]
         modelo = request.form["modelo"]
@@ -31,7 +32,7 @@ def procesar_cotizacion():
         esmerilado = request.form["esmerilado"]
         ancho = request.form["ancho"]
         alto = request.form["alto"]
-        cantidad = request.form["cantidad"]
+        cantidad = int(request.form["cantidad"])
         ventana = controlador.agregar_ventanas(modelo, ancho, alto, acabado, tipo_vidrio, cantidad, esmerilado)
         ventanas.append(ventana)
         
@@ -44,16 +45,15 @@ def procesar_cotizacion():
             controlador.crear_cotizacion(cliente, ventanas)
             total = controlador.total
             vntnas = controlador.obtener_ventanas()
-            print(f"Total: {total}")
-
-            print(f"Subtotal: {total[0]}")
             sub_total = total[0]
             descuento = total[1]
             iva = sub_total*19/100
             total_general = sub_total-descuento+iva
-            totales = [sub_total,descuento,iva,total_general]
+            totales = [sub_total,descuento,iva,total_general,cantidad]
+            ventanas.clear()
+            cantidad_ventanas = 0
             controlador.clear_lists()
-            return render_template("mostrar_cotizacion.html",nombre=nombre_cliente,empresa=empresa_cliente,total=totales,ventanas=vntnas,cantidad=cantidad_ventanas)
+            return render_template("mostrar_cotizacion.html",nombre=nombre_cliente,empresa=empresa_cliente,total=totales,ventanas=vntnas)
         else:
             modelos = controlador.data["estilo_naves"]
             acabados = controlador.data["costo_por_cm_lineal"]

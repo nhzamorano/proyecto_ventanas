@@ -41,7 +41,7 @@ class ControladorCotizacion:
         self.clientes.append(self.cliente)
         return self.cliente
     
-    def agregar_ventanas(self,estilo, ancho, alto, acabado, tipo_vidrio, cantidad, esmerilado):
+    def agregar_ventanas(self,estilo, ancho, alto, acabado, tipo_vidrio, cantidad,  esmerilado):
         from ventana import Ventana
         self.ventana = Ventana(estilo, ancho, alto, acabado, tipo_vidrio, cantidad, esmerilado)
         self.ventanas.append(self.ventana)

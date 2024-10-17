@@ -34,11 +34,11 @@
         </tbody>
     </table>
 
-    <p><strong>Cantidad de ventanas cotizadas:</strong> {{cantidad}}</p>
-    <p><strong>Costo bruto:</strong> {{ "{:.0f}".format(total.0) }}</p>
-    <p><strong>Descuento:</strong> {{ "{:.0f}".format(total.1) }}</p>
-    <p><strong>IVA:</strong> {{ "{:.0f}".format(total.2) }}</p>
-    <p><strong>Total factura:</strong> {{ "{:.0f}".format(total.3) }}</p>
+    <p><strong>Cantidad de ventanas cotizadas:</strong> {{total.4}}</p>
+    <p><strong>Costo bruto:</strong> {{ "{:.2f}".format(total.0) }}</p>
+    <p><strong>Descuento:</strong> {{ "{:.2f}".format(total.1) }}</p>
+    <p><strong>IVA:</strong> {{ "{:.2f}".format(total.2) }}</p>
+    <p><strong>Total factura:</strong> {{ "{:.2f}".format(total.3) }}</p>
 
     <div class="text-center mt-4">
         <a href="/" class="btn btn-secondary">Regresar</a>

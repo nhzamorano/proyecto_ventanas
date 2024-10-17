@@ -14,8 +14,8 @@ class Ventana:
         self.costo_esmerilado = 5.20
         self.controlador = ControladorCotizacion()
     
-    def __format__(self, format_spec=''):
-        return f"{self.estilo} {self.acabado} {self.tipo_vidrio} {self.ancho} {self.alto} {self.cantidad}"
+    #def __format__(self, format_spec=''):
+    #   return f"{self.estilo} {self.acabado} {self.tipo_vidrio} {self.ancho} {self.alto} {self.cantidad}"
     
     def to_list(self):
         """Devuelve una lista con los atributos de la ventana."""
@@ -65,4 +65,6 @@ class Ventana:
         return 0
 
     def calcular_costo_total(self):
-        return self.calcular_costo_aluminio() + self.calcular_costo_vidrio() + self.calcular_costo_esquinas() + self.calcular_costo_chapa()
+        costo_unitario = self.calcular_costo_aluminio() + self.calcular_costo_vidrio() + self.calcular_costo_esquinas() + self.calcular_costo_chapa()
+        return float(costo_unitario) * int(self.cantidad )
+    
